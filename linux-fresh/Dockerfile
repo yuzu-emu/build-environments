@@ -30,4 +30,5 @@ RUN useradd -m -u 1027 -s /bin/bash yuzu && \
 USER 1027
 RUN conan install catch2/2.11.0@ -s compiler.libcxx=libstdc++11 --build=missing && \
     conan install fmt/6.2.0@ -s compiler.libcxx=libstdc++11 --build=missing && \
-    conan install nlohmann_json/3.7.3@ -s compiler.libcxx=libstdc++11 --build=missing
+    conan install nlohmann_json/3.7.3@ -s compiler.libcxx=libstdc++11 --build=missing && \
+    conan install tsl-robin-map/0.6.2@tessil/stable -s compiler.libcxx=libstdc++11 --build-missing

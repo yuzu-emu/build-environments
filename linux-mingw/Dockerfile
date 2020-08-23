@@ -52,4 +52,5 @@ USER 1027
 # Install/build the missing libs (uses the default mingw cross compile profile)
 RUN conan install catch2/2.11.0@ --build=missing && \
     conan install fmt/6.2.0@ --build=missing && \
-    conan install nlohmann_json/3.7.3@ --build=missing
+    conan install nlohmann_json/3.7.3@ --build=missing && \
+    conan install tsl-robin-map/0.6.2@tessil/stable --build-missing
