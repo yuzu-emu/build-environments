@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-MAINTAINER yuzu
+LABEL maintainer="yuzu"
 RUN useradd -m -u 1027 -s /bin/bash yuzu && DEBIAN_FRONTEND=noninteractive apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get -y full-upgrade \
     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
@@ -12,5 +12,5 @@ RUN useradd -m -u 1027 -s /bin/bash yuzu && DEBIAN_FRONTEND=noninteractive apt-g
         sshfs fuse elfutils \
     && apt-get clean autoclean && apt-get autoremove --yes && rm -rf /var/lib/apt /var/lib/dpkg /var/lib/cache /var/lib/log \
     && flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo \
-    && flatpak install -v -y flathub org.kde.Platform//5.13 org.kde.Sdk//5.13
+    && flatpak install -v -y flathub org.kde.Platform//5.15 org.kde.Sdk//5.15
 USER 1027

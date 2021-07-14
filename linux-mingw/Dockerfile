@@ -1,5 +1,5 @@
 FROM archlinux:latest
-MAINTAINER yuzu
+LABEL maintainer="yuzu"
 # Workaround for Arch Linux Docker image failing to build
 # From https://stackoverflow.com/questions/66154574
 RUN patched_glibc=glibc-linux4-2.33-4-x86_64.pkg.tar.zst && \
