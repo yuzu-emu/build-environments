@@ -1,5 +1,5 @@
 FROM alpine
-MAINTAINER yuzu
+LABEL maintainer="yuzu"
 RUN adduser -u 1027 -D -s /bin/bash yuzu && \
     apk update && apk add build-base \
     cmake \

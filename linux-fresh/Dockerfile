@@ -1,13 +1,13 @@
-FROM ubuntu:18.04
-MAINTAINER yuzu
+FROM ubuntu:20.04
+LABEL maintainer="yuzu"
 
 ENV CLANG_VER=12
-ENV CMAKE_VER=3.16.3
+ENV CMAKE_VER=3.20.5
 ENV DEBIAN_FRONTEND=noninteractive
 ENV GCC_VER=10
-ENV QT_PKG_VER=512
-ENV QT_VER=5.12.6
-ENV UBUNTU_VER=bionic
+ENV QT_PKG_VER=515
+ENV QT_VER=5.15.2
+ENV UBUNTU_VER=focal
 
 # Create a user account yuzu (UID 1027) that the container will run as
 RUN useradd -m -u 1027 -s /bin/bash yuzu && \
@@ -27,6 +27,9 @@ RUN useradd -m -u 1027 -s /bin/bash yuzu && \
     libusb-1.0-0-dev \
     libzip-dev \
     libzstd-dev \
+    libavcodec-dev \
+    libavutil-dev \
+    libswscale-dev \
     nasm \
     ninja-build \
     python3-pip \
@@ -40,16 +43,12 @@ RUN useradd -m -u 1027 -s /bin/bash yuzu && \
 # Install updated versions of FFmpeg, GCC, Qt, and SDL2 from launchpad repositories
 RUN add-apt-repository -y ppa:beineri/opt-qt-${QT_VER}-${UBUNTU_VER} && \
     add-apt-repository -y ppa:cybermax-dexter/sdl2-backport && \
-    add-apt-repository -y ppa:jonathonf/ffmpeg-4 && \
     add-apt-repository -y ppa:ubuntu-toolchain-r/test && \
     apt-get update -y && \
     apt-get install --no-install-recommends -y \
     g++-${GCC_VER} \
     gcc-${GCC_VER} \
-    libavcodec-dev \
-    libavutil-dev \
     libsdl2-dev \
-    libswscale-dev \
     qt${QT_PKG_VER}base \
     qt${QT_PKG_VER}tools \
     qt${QT_PKG_VER}wayland \
@@ -79,7 +78,7 @@ RUN cd /tmp && \
 RUN cd /tmp && \
     wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VER}/cmake-${CMAKE_VER}-Linux-x86_64.tar.gz && \
     tar xvf cmake-${CMAKE_VER}-Linux-x86_64.tar.gz && \
-    cp -rv cmake-${CMAKE_VER}-Linux-x86_64/* /usr && \
+    cp -rv cmake-${CMAKE_VER}-linux-x86_64/* /usr && \
     rm -rf cmake-*
 # Install Boost 1.75.0 from yuzu-emu/ext-linux-bin
 RUN cd /tmp && \
